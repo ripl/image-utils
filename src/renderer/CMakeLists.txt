@@ -8,19 +8,19 @@ if(NOT BOT2_VIS_FOUND)
 endif()
 
 add_definitions(-std=gnu99)
-add_library(image-util-renderer SHARED
+add_library(image-utils-renderer SHARED
     renderer_cam_thumb.c)
 
-target_link_libraries(image-util-renderer ${OPENGL_LIBRARIES})
+target_link_libraries(image-utils-renderer ${OPENGL_LIBRARIES})
 
 set(REQUIRED_LIBS image-utils bot2-vis bot2-param-client bot2-frames)
 
-pods_use_pkg_config_packages(image-util-renderer ${REQUIRED_LIBS})
+pods_use_pkg_config_packages(image-utils-renderer ${REQUIRED_LIBS})
 
 pods_install_headers(renderer_cam_thumb.h DESTINATION image_utils)
-pods_install_libraries(image-util-renderer)
-pods_install_pkg_config_file(image-util-renderer
+pods_install_libraries(image-utils-renderer)
+pods_install_pkg_config_file(image-utils-renderer
     CFLAGS
-    LIBS -limage-util-renderer
+    LIBS -limage-utils-renderer
     REQUIRES ${REQUIRED_LIBS}
     VERSION 0.0.1)
