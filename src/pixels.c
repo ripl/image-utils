@@ -1,8 +1,17 @@
 #include <stdio.h>
 #include <stdint.h>
-#include <emmintrin.h>
-#include <pmmintrin.h>
 #include <string.h>
+
+#ifdef __SSE2__
+    #include <emmintrin.h>
+    #include <pmmintrin.h>
+#else
+    #ifdef __aarch64__
+        #include "sse2neon.h"
+    #else
+        #warning SSE2 support is not available. Code will not compile
+    #endif
+#endif
 
 #include "pixels.h"
 

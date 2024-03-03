@@ -1,4 +1,36 @@
-add_definitions(-std=gnu99 -fPIC -msse -msse2 -msse3)
+if(${CMAKE_SYSTEM_PROCESSOR} MATCHES arm*)
+    add_compile_options(
+        -march=armv8-a+fp+simd
+        -std=gnu99
+        -fPIC)#+crypto+crc)    
+elseif(${CMAKE_SYSTEM_PROCESSOR} MATCHES amd64* OR ${CMAKE_SYSTEM_PROCESSOR} MATCHES x86_64*)
+    add_compile_options(
+        -std=gnu99
+        -fPIC
+        -msse
+        -msse2
+        -msse3)
+elseif(${CMAKE_SYSTEM_PROCESSOR} MATCHES i686* OR ${CMAKE_SYSTEM_PROCESSOR} MATCHES x86)
+    add_compile_options(
+        -std=gnu99
+        -fPIC
+        -msse
+        -msse2
+        -msse3)
+endif ()
+
+
+#add_definitions(-std=gnu99 -fPIC -msse -msse2 -msse3)
+
+# add_definitions(
+#     -std=gnu99
+#     -fPIC
+#     # -msse
+#     # -msse2
+#     # -msse3
+# )
+
+# add_compile_options(-march=armv8-a+fp+simd)#+crypto+crc)
 
 file(GLOB c_files *.c)
 file(GLOB h_files *.h)
